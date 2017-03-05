@@ -15,7 +15,7 @@
         android:layout_marginBottom="138dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="E-mail"
+        android:hint="E-mail"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
@@ -29,7 +29,7 @@
         android:layout_marginTop="51dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="Password" />
+        android:hint="Password" />
 
     <Button
         android:id="@+id/button"
