@@ -17,9 +17,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".Setup" />
-        <activity android:name=".MainPage" />
-        <activity android:name=".History" />
-        <activity android:name=".Profile"></activity>
+
+        <fragment android:name=".MainPage" />
+        <fragment android:name=".History" />
+        <fragment android:name=".Profile" />
+
+        <activity android:name=".Driving" />
+        <activity android:name=".Emergency" />
+        <activity android:name=".EndTrip"></activity>
     </application>
 
 </manifest>
