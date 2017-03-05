@@ -1,64 +1,75 @@
 package com.example.ike.banana;
 
-import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.TabHost;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 
-import java.util.HashMap;
+public class Setup extends FragmentActivity {
+/**
+      * The number of pages (wizard steps) to show in this demo.
+      */
+        private static final int NUM_PAGES = 3;
 
-public class Setup extends FragmentActivity implements TabHost.OnTabChangeListener {
+/**
+      * The pager widget, which handles animation and allows swiping horizontally to access previous
+      * and next wizard steps.
+      */
+        private ViewPager mPager;
 
-    private TabHost mTabHost;
-    private HashMap mapTabInfo = new HashMap();
-    private TabInfo mLastTab =null;
-
-    private class TabInfo {
-        private String tag;
-        private Class clss;
-        private Bundle args;
-        private Fragment fragment;
-        TabInfo(String tag, Class clss, Bundle args) {
-            this.tag = tag;
-            this.clss = clss;
-            this.args = args;
-        }
-
-    }
-
-    class TabFactory implements TabHost.TabContentFactory {
-
-        private final Context mContext;
-
-        TabFactory(Context mContext) {
-            this.mContext = mContext;
-        }
-
-        @Override
-        public View createTabContent(String tag) {
-            View v = new View(mContext);
-            v.setMinimumWidth(0);
-            v.setMinimumHeight(0);
-            return null;
-        }
-    }
+/**
+      * The pager adapter, which provides the pages to the view pager widget.
+      */
+        private ScreenSlidePagerAdapter mPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
 
-    }
-
-    private void initializeTabHost(Bundle args) {
-        mTabHost = (TabHost)findViewById()
+// Instantiate a ViewPager and a PagerAdapter.
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        mPager.setAdapter(mPagerAdapter);
+        mPager.setCurrentItem(1);
     }
 
     @Override
-    public void onTabChanged(String s) {
+    public void onBackPressed() {
+    if (mPager.getCurrentItem() == 0) {
+            // If the user is currently looking at the first step, allow the system to handle the
+             // Back button. This calls finish() on this activity and pops the back stack.
+            super.onBackPressed();
+        } else {
+             // Otherwise, select the previous step.
+            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
+        }
+    }
 
+    /**
+      * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
+      * sequence.
+      */
+    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+        public ScreenSlidePagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            if(position == 0)
+                return new History();
+            else if(position ==1)
+                return new MainPage();
+            else
+                return new Profile();
+        }
+
+        @Override
+        public int getCount() {
+            return NUM_PAGES;
+        }
     }
 }

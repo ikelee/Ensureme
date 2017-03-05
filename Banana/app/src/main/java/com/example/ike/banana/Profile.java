@@ -14,10 +14,9 @@ public class Profile extends Fragment {
           */
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (container == null) {
+        ViewGroup rootView = (ViewGroup) inflater.inflate(
+                R.layout.activity_profile,container, false);
 
-            return null;
-        }
-        return (LinearLayout)inflater.inflate(R.layout.activity_profile, container, false);
+        return rootView;
     }
 }
