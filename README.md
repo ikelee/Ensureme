@@ -1,5 +1,3 @@
 # ProjectBanana
 
-Well, the name's gotta get changed later. 
-
-- Ali checked in
+Project Made for a Hackathon, a prototype of our pay by usage insurance application. 
